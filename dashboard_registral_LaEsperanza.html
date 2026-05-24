@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base Registral y Catastral — P.E. 02027041 | La Esperanza, Amarilis, Huánuco</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F4F6F9;color:#1a2332;font-size:15px;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1F4E79 0%,#2E75B6 100%);color:#fff;padding:18px 20px;border-radius:10px;margin-bottom:16px}
+header .pre{font-size:11px;opacity:.75;letter-spacing:.05em;margin-bottom:4px}
+header h1{font-size:17px;font-weight:600;line-height:1.3}
+header .sub{font-size:12px;opacity:.7;margin-top:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.metric-card{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0}
+.metric-card .lbl{font-size:11px;color:#64748b;margin-bottom:3px}
+.metric-card .val{font-size:16px;font-weight:600;color:#1F4E79}
+.metric-card .sub{font-size:11px;color:#94a3b8;margin-top:2px}
+.main{display:flex;gap:14px;align-items:flex-start}
+.map-col{flex:0 0 340px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.leg{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:500;display:flex;align-items:center;gap:4px}
+.leg-t{background:#FAECE7;color:#993C1D}.leg-p{background:#FAEEDA;color:#854F0B}
+.leg-c{background:#E6F1FB;color:#185FA5}.leg-r{background:#E1F5EE;color:#0F6E56}
+#mapa{display:block;width:100%;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;background:#fafcff}
+.map-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:5px}
+.detail-col{flex:1;min-width:0}
+.detail-box{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:18px;min-height:380px}
+.no-sel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:340px;color:#94a3b8;text-align:center}
+.no-sel svg{margin-bottom:12px;opacity:.5}
+.no-sel p{font-size:14px}
+.badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:4px;font-weight:500}
+.bt{background:#FAECE7;color:#993C1D}.bp{background:#FAEEDA;color:#854F0B}
+.bc{background:#E6F1FB;color:#185FA5}.br{background:#E1F5EE;color:#0F6E56}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.mini-card{background:#f8fafc;border-radius:7px;padding:10px;border:1px solid #e2e8f0}
+.mini-card .lbl{font-size:10px;color:#64748b;margin-bottom:2px}
+.mini-card .val{font-size:14px;font-weight:600;color:#1a2332}
+.mini-card .sub{font-size:10px;color:#94a3b8}
+.sec-label{font-size:11px;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
+.titular-box{background:#f8fafc;border-radius:7px;padding:10px 12px;margin-bottom:14px;border:1px solid #e2e8f0}
+.titular-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #e2e8f0;font-size:12px;gap:8px}
+.titular-row:last-child{border-bottom:none}
+.titular-row .name{font-weight:500;color:#1a2332;flex:1}
+.titular-row .dni{color:#64748b;font-size:11px}
+.titular-row .pct{color:#1F4E79;font-weight:600;font-size:12px;white-space:nowrap}
+details.cop summary{cursor:pointer;font-size:12px;color:#2E75B6;font-weight:500;padding:7px 10px;background:#EFF6FF;border-radius:6px;border:1px solid #BFDBFE;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+details.cop summary::-webkit-details-marker{display:none}
+details.cop summary::before{content:'▶';font-size:9px;transition:transform .2s}
+details[open].cop summary::before{transform:rotate(90deg)}
+details.cop .cop-inner{border:1px solid #BFDBFE;border-top:none;border-radius:0 0 6px 6px;background:#fff;margin-top:0;padding:4px 0}
+.lind-grid{display:grid;grid-template-columns:18px 1fr;gap:4px 10px;font-size:12px;border:1px solid #e2e8f0;border-radius:7px;padding:10px;margin-bottom:14px;background:#f8fafc}
+.lind-dir{font-weight:600;color:#64748b}
+.lind-val{color:#1a2332}
+.hist-timeline{position:relative}
+.hist-item{position:relative;padding-left:18px;margin-bottom:14px}
+.hist-item:last-child{margin-bottom:0}
+.hist-dot{position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:50%;background:#2E75B6}
+.hist-line{position:absolute;left:3.5px;top:13px;bottom:-14px;width:1px;background:#e2e8f0}
+.hist-item:last-child .hist-line{display:none}
+.hist-rubro{font-size:11px;color:#64748b;margin-bottom:2px}
+.hist-acto{font-size:13px;font-weight:600;color:#1F4E79;margin-bottom:3px}
+.hist-de{font-size:12px;color:#475569;margin-bottom:4px}
+.hist-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:#94a3b8}
+.no-hist{font-size:12px;color:#94a3b8;font-style:italic;padding:8px 0}
+.parcel-list{display:none}
+@media(max-width:720px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .main{flex-direction:column}
+  .map-col{flex:none;width:100%}
+  .detail-col{width:100%}
+  .cards3{grid-template-columns:repeat(2,1fr)}
+  .parcel-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+  .pcard{background:#fff;border-radius:8px;border:1px solid #e2e8f0;padding:10px;cursor:pointer;transition:border-color .15s}
+  .pcard:active{border-color:#2E75B6;background:#EFF6FF}
+  .pcard .pn{font-size:12px;font-weight:600;color:#1a2332;margin-bottom:2px}
+  .pcard .pa{font-size:11px;color:#64748b;margin-bottom:4px}
+  .pcard .pm{font-size:11px;color:#1F4E79}
+}
+@media(max-width:400px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .parcel-list{grid-template-columns:1fr 1fr}
+  .cards3{grid-template-columns:1fr 1fr}
+}
+footer{margin-top:16px;text-align:center;font-size:11px;color:#94a3b8;padding:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="pre">Registro de Propiedad Inmueble · Zona Registral N° VI Sede Huánuco · SUNARP</div>
+  <h1>Base Registral y Catastral — Predio P.E. 02027041</h1>
+  <div class="sub">Jr. San Juan Bosco · C.P. La Esperanza · Dist. Amarilis · Prov. y Dpto. Huánuco · Datum WGS 84 / Zona 18S</div>
+</header>
+
+<div class="metrics" id="metrics"></div>
+
+<div class="main">
+  <div class="map-col">
+    <div class="legend">
+      <span class="leg leg-t">● Transferida a 3°</span>
+      <span class="leg leg-p">● Transf. parcial</span>
+      <span class="leg leg-c">● Copropiedad</span>
+      <span class="leg leg-r">● Remanente</span>
+    </div>
+    <svg id="mapa" viewBox="0 0 310 345" aria-label="Mapa catastral del predio P.E. 02027041"></svg>
+    <p class="map-note">Toca una parcela para ver su información registral</p>
+    <div class="parcel-list" id="parcel-list"></div>
+  </div>
+
+  <div class="detail-col">
+    <div class="detail-box" id="detail-box">
+      <div class="no-sel" id="no-sel">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <p>Selecciona una parcela en el mapa<br>para ver su información registral</p>
+      </div>
+      <div id="sel-content" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<footer>Base de datos registral y catastral · Independización sin inscripción del planeamiento integral aprobado · Antecedente: P.E. 02027041 del R.P.</footer>
+
+</div>
+<script>
+const COPROP=[
+  {n:"NARDA SOCORRO TORRES MARTINEZ",dni:"22422988",ec:"Casada",pct:"15.407142%"},
+  {n:"ALBERTO ENRIQUE ROMANI RIVERA",dni:"10302008",ec:"Casado (c/ Pilar Torres de Romani)",pct:"21.620000%"},
+  {n:"EDGARDO GODOFREDO TORRES MARTINEZ",dni:"09166165",ec:"Soltero",pct:"15.407142%"},
+  {n:"PILAR LOURDES TORRES DE ROMANI",dni:"10302009",ec:"Casada",pct:"29.177142%"},
+  {n:"LICIA DORIS TORRES BALLON",dni:"07674139",ec:"—",pct:"4.597142%"},
+  {n:"SERGIO GUSTAVO TORRES MARTINEZ",dni:"22423922",ec:"Casado",pct:"4.597142%"},
+  {n:"ROCIO TEODOLINDA TORRES MARTINEZ",dni:"10308558",ec:"Soltera",pct:"4.597142%"},
+  {n:"BERTHA ELIZABETH SAENZ FERNANDEZ",dni:"08681550",ec:"Viuda",pct:"2.298571%"},
+  {n:"ANGHELA NATALY TORRES SAENZ",dni:"72911444",ec:"Soltera",pct:"2.298571%"}
+];
+
+function copropHTML(){
+  return`<details class="cop" style="margin-bottom:14px">
+    <summary>Ver 9 copropietarios del predio matriz</summary>
+    <div class="cop-inner">
+      ${COPROP.map(c=>`<div class="titular-row" style="padding:6px 12px">
+        <span class="name">${c.n}<br><span class="dni">DNI ${c.dni} · ${c.ec}</span></span>
+        <span class="pct">${c.pct}</span>
+      </div>`).join('')}
+    </div>
+  </details>`;
+}
+
+const DATA=[
+  {id:0,n:"PARCELA 1",pa:"N° 11187981",tp:"Rústica",ha:0.21712,m2:2171.16,pe:188.21,es:"t",
+   vx:['P14','P2','P3','P4','P5','P19'],
+   li:{N:"Parcela 2 — 54.86 ml (2 tramos)",E:"Área Remanente 2 — 45.00 ml",O:"Calle S/N y Parcela 2 — 19.08+17.02+8.90 ml = 45.00 ml",S:"Jr. San Juan Bosco — 43.36 ml"},
+   titHTML:`<div class="sec-label">Titulares actuales</div>
+     <div class="titular-box">
+       <div class="titular-row"><span class="name">FELIX PANTALEON ALVAREZ<br><span class="dni">DNI 22419837 · Casado</span></span><span class="pct">50%</span></div>
+       <div class="titular-row"><span class="name">ADA JARA DE PANTALEON<br><span class="dni">DNI 22420130 · Casada</span></span><span class="pct">50%</span></div>
+     </div>
+     <div style="font-size:11px;color:#64748b;margin-bottom:14px">Sociedad conyugal · 100% del dominio · Adquirido por compraventa inscrita el 19/09/2023</div>`,
+   hi:[
+    {rb:"C00001",ac:"Donación de acciones (4.597142%)",de:"Licia Doris Torres Ballon",ha:"Soc. Cony. Romani-Torres",fp:"02/06/2023",fi:"07/07/2023",tit:"2023-01585606",mo:"S/. 6,157.00"},
+    {rb:"C00002",ac:"Donación de cuota ideal (95.40%)",de:"6 copropietarios restantes",ha:"Soc. Cony. Romani-Torres",fp:"17/07/2023",fi:"07/08/2023",tit:"2023-02048570",mo:"S/. 6,157.00"},
+    {rb:"C00003",ac:"Compraventa (100%)",de:"Soc. Cony. Romani-Torres",ha:"Soc. Cony. Pantaleon-Jara",fp:"18/08/2023",fi:"19/09/2023",tit:"2023-02420718",mo:"US$ 125,377.44"}
+   ]},
+  {id:1,n:"PARCELA 2",pa:"N° 11187982",tp:"Rústica",ha:0.5206,m2:5206.38,pe:344.83,es:"p",
+   vx:['P1','P14','P19','P5','P6','P7','P8','P9','P10','P11','P12','P13'],
+   li:{N:"Psje. San Antonio — 73.19+52.42 ml = 125.61 ml",E:"Área Remanente 2 — 54.77 ml",O:"Calle S/N — 7 tramos = 100.69 ml",S:"Parcela 1 — 54.86+8.90 ml = 63.76 ml"},
+   titHTML:`<div class="sec-label">Titulares actuales</div>
+     <div class="titular-box">
+       <div class="titular-row"><span class="name">ALBERTO ENRIQUE ROMANI RIVERA<br><span class="dni">DNI 10302008 · Casado</span></span><span class="pct" style="white-space:nowrap">~93.36%</span></div>
+       <div class="titular-row"><span class="name">PILAR LOURDES TORRES DE ROMANI<br><span class="dni">DNI 10302009 · Casada</span></span><span class="pct"></span></div>
+       <div style="font-size:10px;color:#94a3b8;padding:4px 0 6px">Sociedad conyugal Romani-Torres</div>
+       <div class="titular-row" style="border-top:1px solid #e2e8f0;padding-top:6px"><span class="name">IVAN GRABIEL MINAYA CAJALEON<br><span class="dni">DNI 15764356 · Casado</span></span><span class="pct">6.64%</span></div>
+       <div class="titular-row"><span class="name">LLENIA JESSICA DONAYRE SIERRALTA<br><span class="dni">DNI 20094474 · Casada</span></span><span class="pct"></span></div>
+       <div style="font-size:10px;color:#94a3b8;padding:4px 0 0">Sociedad conyugal Minaya-Donayre</div>
+     </div>`,
+   hi:[
+    {rb:"Rubro C — G00001",ac:"Compraventa (6.64%)",de:"Romani-Torres + Licia Torres Ballon",ha:"Soc. Cony. Minaya-Donayre",fp:"25/04/2023",fi:"30/05/2023",tit:"2023-01184074",mo:"USD$ 30,325.00"},
+    {rb:"G00001",ac:"Donación de cuota ideal",de:"6 copropietarios restantes",ha:"Soc. Cony. Romani-Torres",fp:"17/07/2023",fi:"07/08/2023",tit:"2023-02048570",mo:"S/. 14,766.00"}
+   ]},
+  {id:2,n:"PARCELA 3",pa:"N° 11187983",tp:"Rústica",ha:0.05411,m2:541.15,pe:95.75,es:"c",vx:['P38','P56','P23','P53'],li:{N:"Parcela 7 — 17.37 ml",E:"Parcela 4 — 29.56 ml",O:"Área Remanente 2 — 29.50 ml",S:"Jr. San Juan Bosco — 19.32 ml"},titHTML:copropHTML(),hi:[]},
+  {id:3,n:"PARCELA 4",pa:"N° 11187984",tp:"Rústica",ha:0.05411,m2:541.15,pe:96.01,es:"c",vx:['P39','P38','P53','P49'],li:{N:"Parcela 7 — 17.37 ml",E:"Parcela 5 — 29.76 ml",O:"Parcela 3 — 29.56 ml",S:"Jr. San Juan Bosco — 19.32 ml"},titHTML:copropHTML(),hi:[]},
+  {id:4,n:"PARCELA 5",pa:"N° 11187985",tp:"Rústica",ha:0.05411,m2:541.15,pe:96.52,es:"c",vx:['P40','P39','P49','P50'],li:{N:"Parcela 7 — 17.37 ml",E:"Parcela 6 — 30.07 ml",O:"Parcela 4 — 29.76 ml",S:"Jr. San Juan Bosco — 19.32 ml"},titHTML:copropHTML(),hi:[]},
+  {id:5,n:"PARCELA 6",pa:"N° 11187986",tp:"Rústica",ha:0.05411,m2:541.15,pe:97.28,es:"c",vx:['P41','P40','P50','P46'],li:{N:"Parcela 7 — 17.37 ml",E:"Área Remanente 1 — 30.51 ml",O:"Parcela 5 — 30.07 ml",S:"Jr. San Juan Bosco — 19.32 ml"},titHTML:copropHTML(),hi:[]},
+  {id:6,n:"PARCELA 7",pa:"N° 11187987",tp:"Rústica",ha:0.14241,m2:1424.06,pe:176.81,es:"c",vx:['P36','P56','P38','P39','P40','P41','P34'],li:{N:"Parcela 8 — 63.87 ml",E:"Área Remanente 2 — 21.83 ml",O:"Área Remanente 1 — 21.64 ml",S:"Parcelas 3,4,5,6 — 4×17.37 ml = 69.48 ml"},titHTML:copropHTML(),hi:[]},
+  {id:7,n:"PARCELA 8",pa:"N° 11187988",tp:"Rústica",ha:0.09226,m2:922.64,pe:154.15,es:"c",vx:['P32','P36','P34','P35'],li:{N:"Parcela 9 — 59.91 ml",E:"Área Remanente 1 — 15.46 ml",O:"Área Remanente 2 — 14.91 ml",S:"Parcela 7 — 63.87 ml"},titHTML:copropHTML(),hi:[]},
+  {id:8,n:"PARCELA 9",pa:"N° 11187989",tp:"Rústica",ha:0.04414,m2:441.44,pe:133.09,es:"c",vx:['P28','P32','P35','P26'],li:{N:"Parcela 10 — 57.92 ml",E:"Área Remanente 1 — 7.77 ml",O:"Área Remanente 2 — 7.49 ml",S:"Parcela 8 — 59.91 ml"},titHTML:copropHTML(),hi:[]},
+  {id:9,n:"PARCELA 10",pa:"N° 11187990",tp:"Rústica",ha:0.14240,m2:1424.04,pe:162.16,es:"c",vx:['P22','P28','P26','P27'],li:{N:"Pasaje San Antonio — 50.97 ml",E:"Área Remanente 1 — 27.12 ml",O:"Área Remanente 2 — 26.16 ml",S:"Parcela 9 — 57.92 ml"},titHTML:copropHTML(),hi:[]},
+  {id:10,n:"ÁREA REMANENTE 1",pa:"P.E. 02027041",tp:"Rústica",ha:0.34342,m2:3434.23,pe:272.12,es:"r",vx:['P27','P46','P60','P61'],li:{N:"Parcelas 6,7,8,9,10",E:"Área Remanente 1",O:"—",S:"Jr. San Juan Bosco"},titHTML:copropHTML(),hi:[]},
+  {id:11,n:"ÁREA REMANENTE 2",pa:"P.E. 02027041",tp:"Rústica",ha:0.07947,m2:794.68,pe:215.41,es:"r",vx:['P2','P1','P22','P23'],li:{N:"Parcelas 7,8,9,10",E:"—",O:"Área Remanente 2",S:"Jr. San Juan Bosco"},titHTML:copropHTML(),hi:[]}
+];
+
+const PTS={P1:[365761.0523,8905854.4729],P2:[365711.0508,8905768.1372],P3:[365673.5261,8905789.8697],P4:[365679.1879,8905808.0867],P5:[365682.4422,8905824.7885],P6:[365682.7995,8905838.6575],P7:[365682.1436,8905843.6529],P8:[365678.2252,8905855.210],P9:[365671.3417,8905869.9372],P10:[365659.2336,8905892.9436],P11:[365654.9594,8905907.1869],P12:[365653.639,8905919.5711],P13:[365715.9251,8905881.1421],P14:[365733.6034,8905807.0779],P19:[365685.3614,8905833.1961],P22:[365767.9373,8905850.404],P23:[365717.9206,8905764.1585],P26:[365804.6889,8905798.3263],P27:[365811.826,8905824.4873],P28:[365754.8153,8905827.7772],P32:[365751.0562,8905821.2954],P34:[365798.5767,8905775.9217],P35:[365802.6444,8905790.832],P36:[365743.5774,8905808.3994],P38:[365747.748,8905780.9742],P39:[365762.7759,8905772.2707],P40:[365777.8038,8905763.5673],P41:[365792.8318,8905754.8638],P46:[365784.8004,8905725.4249],P49:[365751.3605,8905744.7917],P50:[365768.0805,8905735.1083],P53:[365734.6406,8905754.4751],P56:[365732.72,8905789.6777],P60:[365809.9468,8905710.8613],P61:[365846.5477,8905803.9837]};
+const MIN_E=365653.639,MIN_N=8905710.8613,SC=1.38,PAD=22,SH=345;
+function tx(p){const[e,n]=PTS[p];return[+((e-MIN_E)*SC+PAD).toFixed(1),+((SH-PAD)-(n-MIN_N)*SC).toFixed(1)];}
+function ppts(vx){return vx.map(p=>tx(p).join(',')).join(' ');}
+function cen(vx){const a=vx.map(p=>tx(p));return[a.reduce((s,p)=>s+p[0],0)/a.length,a.reduce((s,p)=>s+p[1],0)/a.length];}
+
+const FILLS={t:'#FAECE7',p:'#FAEEDA',c:'#E6F1FB',r:'#E1F5EE'};
+const STROKES={t:'#D85A30',p:'#BA7517',c:'#185FA5',r:'#0F6E56'};
+const LABELS={t:'Transferida a tercero',p:'Transferencia parcial',c:'Copropiedad original',r:'Área remanente'};
+const BCLS={t:'bt',p:'bp',c:'bc',r:'br'};
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('mapa');
+let selPoly=null;
+
+DATA.forEach(d=>{
+  const g=document.createElementNS(NS,'g');g.style.cursor='pointer';
+  const tt=document.createElementNS(NS,'title');tt.textContent=d.n;g.appendChild(tt);
+  const poly=document.createElementNS(NS,'polygon');
+  poly.setAttribute('points',ppts(d.vx));
+  poly.setAttribute('fill',FILLS[d.es]);poly.setAttribute('stroke',STROKES[d.es]);
+  poly.setAttribute('stroke-width','1.5');poly.setAttribute('stroke-linejoin','round');
+  const[cx,cy]=cen(d.vx);
+  const lbl=document.createElementNS(NS,'text');
+  lbl.setAttribute('x',cx);lbl.setAttribute('y',cy);lbl.setAttribute('text-anchor','middle');
+  lbl.setAttribute('dominant-baseline','middle');lbl.setAttribute('font-size','7');
+  lbl.setAttribute('fill',STROKES[d.es]);lbl.setAttribute('font-weight','600');
+  lbl.setAttribute('pointer-events','none');
+  lbl.textContent=d.n.replace('ÁREA REMANENTE','A.R.').replace('PARCELA','P.');
+  g.appendChild(poly);g.appendChild(lbl);svg.appendChild(g);
+  g.addEventListener('click',()=>{
+    if(selPoly){selPoly.setAttribute('stroke-width','1.5');selPoly.removeAttribute('filter');}
+    poly.setAttribute('stroke-width','3');selPoly=poly;showDetail(d);
+    if(window.innerWidth<=720)document.getElementById('detail-box').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  g.addEventListener('mouseenter',()=>{if(poly!==selPoly)poly.setAttribute('stroke-width','2.5');});
+  g.addEventListener('mouseleave',()=>{if(poly!==selPoly)poly.setAttribute('stroke-width','1.5');});
+});
+
+const na=document.createElementNS(NS,'g');
+na.innerHTML=`<polygon points="286,22 282,36 286,33 290,36" fill="#64748b"/><text x="286" y="18" text-anchor="middle" font-size="8" fill="#64748b" font-weight="700">N</text>`;
+svg.appendChild(na);
+
+function showDetail(d){
+  document.getElementById('no-sel').style.display='none';
+  const sc=document.getElementById('sel-content');sc.style.display='block';
+  const lindH=Object.entries(d.li).map(([dir,val])=>
+    val&&val!=='—'?`<span class="lind-dir">${dir}</span><span class="lind-val">${val}</span>`:''
+  ).join('');
+  const histH=d.hi.length===0
+    ?`<p class="no-hist">Sin actos posteriores a la independización. La partida se mantiene con los titulares originales del predio matriz.</p>`
+    :d.hi.map((h,i)=>`<div class="hist-item">
+        <div class="hist-dot"></div><div class="hist-line"></div>
+        <div class="hist-rubro">${h.rb} &nbsp;·&nbsp; Inscrito: <strong>${h.fi}</strong></div>
+        <div class="hist-acto">${h.ac}</div>
+        <div class="hist-de">${h.de} → ${h.ha}</div>
+        <div class="hist-meta">
+          <span>📄 ${h.tit}</span>
+          <span>💰 ${h.mo}</span>
+          <span>📅 Presentado: ${h.fp}</span>
+        </div>
+      </div>`).join('');
+  sc.innerHTML=`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+      <span style="font-size:16px;font-weight:700;color:#1F4E79">${d.n}</span>
+      <span class="badge ${BCLS[d.es]}">${LABELS[d.es]}</span>
+    </div>
+    <div class="cards3">
+      <div class="mini-card"><div class="lbl">Área</div><div class="val">${d.m2.toLocaleString('es-PE')} m²</div><div class="sub">${d.ha.toFixed(5)} ha</div></div>
+      <div class="mini-card"><div class="lbl">Perímetro</div><div class="val">${d.pe.toFixed(2)} ml</div><div class="sub">${d.vx.length} vértices</div></div>
+      <div class="mini-card"><div class="lbl">Partida</div><div class="val" style="font-size:12px">${d.pa}</div><div class="sub">${d.tp}</div></div>
+    </div>
+    ${d.titHTML}
+    ${lindH?`<div class="sec-label" style="margin-bottom:5px">Linderos</div><div class="lind-grid">${lindH}</div>`:''}
+    <div class="sec-label" style="margin-bottom:8px">Historia registral · Títulos de dominio</div>
+    <div class="hist-timeline">${histH}</div>`;
+}
+
+const total=DATA.reduce((s,d)=>s+d.m2,0);
+const actos=DATA.reduce((s,d)=>s+d.hi.length,0);
+document.getElementById('metrics').innerHTML=[
+  {lb:'Partida matriz',v:'P.E. 02027041',s:'Antecedente registral'},
+  {lb:'Área total predio',v:(total/10000).toFixed(4)+' ha',s:total.toLocaleString('es-PE',{maximumFractionDigits:2})+' m²'},
+  {lb:'Unidades registrales',v:'12',s:'10 independizadas · 2 remanentes'},
+  {lb:'Actos registrales',v:String(actos),s:'Inscritos en partidas independizadas'}
+].map(m=>`<div class="metric-card"><div class="lbl">${m.lb}</div><div class="val">${m.v}</div><div class="sub">${m.s}</div></div>`).join('');
+
+document.getElementById('parcel-list').innerHTML=DATA.map(d=>`
+  <div class="pcard" onclick="selectById(${d.id})">
+    <div class="pn">${d.n}</div>
+    <div class="pa">${d.pa}</div>
+    <div class="pm">${d.m2.toLocaleString('es-PE')} m²</div>
+    <span class="badge ${BCLS[d.es]}" style="margin-top:6px;font-size:10px">${LABELS[d.es]}</span>
+  </div>`).join('');
+
+function selectById(id){
+  const d=DATA[id];
+  svg.querySelectorAll('polygon').forEach((p,i)=>{
+    p.setAttribute('stroke-width',i===id?'3':'1.5');
+  });
+  selPoly=svg.querySelectorAll('polygon')[id];
+  showDetail(d);
+}
+</script>
+</body>
+</html>
